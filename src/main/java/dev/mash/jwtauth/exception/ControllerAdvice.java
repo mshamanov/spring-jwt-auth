@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.*;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -59,8 +60,8 @@ public class ControllerAdvice extends ResponseEntityExceptionHandler {
      * @param request current request
      * @return response
      */
-    @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<Object> handleException(BadCredentialsException e, HttpServletRequest request) {
+    @ExceptionHandler({BadCredentialsException.class, AuthenticationException.class})
+    public ResponseEntity<Object> handleException(Exception e, HttpServletRequest request) {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.FORBIDDEN, e.getMessage());
         problemDetail.setInstance(URI.create(request.getRequestURI()));
         return ResponseEntity.of(problemDetail).build();
