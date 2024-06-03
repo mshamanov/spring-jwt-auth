@@ -40,13 +40,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
     private final AuthenticationService authenticationService;
 
-    @Operation(summary = "Registers a new user")
+    @Operation(summary = "Register a new user")
     @PostMapping("/sign-up")
     public AccessTokenResponse signUp(@RequestBody @Valid SignUpRequest request) {
         return this.authenticationService.signUp(request);
     }
 
-    @Operation(summary = "Authenticates a user")
+    @Operation(summary = "Authenticate a user")
     @PostMapping("/sign-in")
     public AccessTokenResponse signIn(@RequestBody @Valid SignInRequest request) {
         return this.authenticationService.signIn(request);
