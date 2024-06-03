@@ -6,5 +6,5 @@ package dev.mash.jwtauth.entity;
  * @author Mikhail Shamanov
  */
 public enum RoleType {
-    ROLE_ADMIN, ROLE_USER;
+    ROLE_ADMIN, ROLE_USER
 }

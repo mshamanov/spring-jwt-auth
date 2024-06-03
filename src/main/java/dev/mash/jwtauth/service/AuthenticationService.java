@@ -2,16 +2,15 @@ package dev.mash.jwtauth.service;
 
 import dev.mash.jwtauth.entity.Role;
 import dev.mash.jwtauth.entity.RoleType;
+import dev.mash.jwtauth.entity.User;
 import dev.mash.jwtauth.rest.model.AccessTokenResponse;
 import dev.mash.jwtauth.rest.model.SignInRequest;
 import dev.mash.jwtauth.rest.model.SignUpRequest;
-import dev.mash.jwtauth.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -66,16 +65,5 @@ public class AuthenticationService {
         String jwt = this.jwtService.generateToken(user);
 
         return new AccessTokenResponse(jwt);
-    }
-
-
-    /**
-     * Returns current user based on information from {@link SecurityContextHolder}
-     *
-     * @return current user
-     */
-    public User getCurrentUser() {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return this.userService.getByUsername(username);
     }
 }

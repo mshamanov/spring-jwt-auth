@@ -77,18 +77,6 @@ public class JwtService {
     }
 
     /**
-     * Checks whether JWT token is valid
-     *
-     * @param token       JWT token
-     * @param userDetails user data
-     * @return true if token is valid
-     */
-    public boolean isTokenValid(String token, UserDetails userDetails) {
-        String userName = this.extractUserName(token);
-        return (userName.equals(userDetails.getUsername())) && !this.isTokenExpired(token);
-    }
-
-    /**
      * Checks whether JWT token is expired
      *
      * @param token JWT token
