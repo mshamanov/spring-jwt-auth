@@ -44,7 +44,7 @@ public class ControllerAdvice extends ResponseEntityExceptionHandler {
     /**
      * Handles {@link ResponseStatusException}
      *
-     * @param e instance of exception
+     * @param e exception
      * @return response
      */
     @ExceptionHandler(ResponseStatusException.class)
@@ -55,7 +55,8 @@ public class ControllerAdvice extends ResponseEntityExceptionHandler {
     /**
      * Handles {@link BadCredentialsException}
      *
-     * @param e instance of exception
+     * @param e       exception
+     * @param request current request
      * @return response
      */
     @ExceptionHandler(BadCredentialsException.class)
@@ -68,7 +69,8 @@ public class ControllerAdvice extends ResponseEntityExceptionHandler {
     /**
      * Handles any exception
      *
-     * @param e instance of exception
+     * @param e       exception
+     * @param request current request
      * @return response
      */
     @ExceptionHandler(Exception.class)
