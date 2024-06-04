@@ -22,7 +22,7 @@ import java.security.Principal;
  */
 @Tag(name = "User")
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/v1/user")
 @SecurityRequirement(name = "bearerAuth")
 @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 public class UserController {
@@ -32,10 +32,10 @@ public class UserController {
             description = "Returns a welcome message for the authorized user",
             responses = @ApiResponse(
                     responseCode = "200",
-                    content = @Content(examples = @ExampleObject("Hello, User!"))
+                    content = @Content(examples = @ExampleObject("Welcome, User!"))
             )
     )
     public String welcome(Principal principal) {
-        return "Hello, " + principal.getName() + "!";
+        return "Welcome, " + principal.getName() + "!";
     }
 }
