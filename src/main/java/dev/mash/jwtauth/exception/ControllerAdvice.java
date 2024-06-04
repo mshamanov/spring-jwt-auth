@@ -54,20 +54,6 @@ public class ControllerAdvice extends ResponseEntityExceptionHandler {
     }
 
     /**
-     * Handles {@link BadCredentialsException}
-     *
-     * @param e       exception
-     * @param request current request
-     * @return response
-     */
-    @ExceptionHandler({BadCredentialsException.class, AuthenticationException.class})
-    public ResponseEntity<Object> handleException(Exception e, HttpServletRequest request) {
-        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.FORBIDDEN, e.getMessage());
-        problemDetail.setInstance(URI.create(request.getRequestURI()));
-        return ResponseEntity.of(problemDetail).build();
-    }
-
-    /**
      * Handles any exception
      *
      * @param e       exception
