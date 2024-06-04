@@ -25,7 +25,7 @@ import java.util.function.Function;
 public class JwtService {
     private final SecretKey secretKey;
 
-    @Value("${jwt.token.expiration}")
+    @Value("${jwt.token.expiration:24h}")
     private Duration expiration;
 
     public JwtService() {
