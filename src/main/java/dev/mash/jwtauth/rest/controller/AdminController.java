@@ -57,7 +57,7 @@ public class AdminController {
                     )
             )
     )
-    public Map<String, List<UserResponse>> users() {
+    public Map<String, List<UserResponse>> getAllUsers() {
         List<UserResponse> users = this.userService.getAllUsers().stream().map(user -> {
                     List<RoleType> roleTypes = user.getRoles().stream().map(Role::getType).toList();
                     return new UserResponse(user.getUsername(), user.getEmail(), roleTypes);
@@ -83,7 +83,7 @@ public class AdminController {
                     )
             )
     )
-    public Map<String, List<RoleResponse>> exampleAdmin() {
+    public Map<String, List<RoleResponse>> getAllRoles() {
         List<RoleResponse> roles = this.roleService.getAllRoles()
                 .stream()
                 .map(r -> new RoleResponse(r.getType().name()))
