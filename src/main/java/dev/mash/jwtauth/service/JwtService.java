@@ -25,11 +25,11 @@ import java.util.function.Function;
 public class JwtService {
     private final SecretKey secretKey;
 
-    @Value("${jwt.token.expiration:24h}")
-    private Duration expiration;
+    private final Duration expiration;
 
-    public JwtService() {
+    public JwtService(@Value("${jwt.token.expiration:24h}") Duration expiration) {
         this.secretKey = this.getSigningKey();
+        this.expiration = expiration;
     }
 
     /**
