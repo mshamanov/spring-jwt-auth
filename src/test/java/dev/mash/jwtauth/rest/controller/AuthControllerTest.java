@@ -52,19 +52,19 @@ class AuthControllerTest {
     public static final String ADMIN_KEY = "admin";
 
     static {
-        SignInRequest signInUserRequest = new SignInRequest(USER_KEY, "password");
+        SignInRequest signInUserRequest = new SignInRequest("user", "password");
         User dbUserData =
                 new dev.mash.jwtauth.entity.User(
-                        1L, USER_KEY,
+                        1L, "user",
                         "user@email.com",
                         "$2y$10$u7XrM8iGgdD3E4VtH.wikOQIhcFEsB0mCQpdfBNzLS./xOmXgdvU6",
                         List.of(new Role(RoleType.ROLE_USER))
                 );
 
-        SignInRequest signInAdminRequest = new SignInRequest(ADMIN_KEY, "password");
+        SignInRequest signInAdminRequest = new SignInRequest("admin", "password");
         User dbAdminData =
                 new dev.mash.jwtauth.entity.User(
-                        2L, ADMIN_KEY,
+                        2L, "admin",
                         "admin@email.com",
                         "$2y$10$u7XrM8iGgdD3E4VtH.wikOQIhcFEsB0mCQpdfBNzLS./xOmXgdvU6",
                         List.of(new Role(RoleType.ROLE_USER), new Role(RoleType.ROLE_ADMIN))
