@@ -10,10 +10,7 @@ import dev.mash.jwtauth.repository.RoleRepository;
 import dev.mash.jwtauth.repository.UserRepository;
 import dev.mash.jwtauth.rest.model.SignInRequest;
 import dev.mash.jwtauth.rest.model.SignUpRequest;
-import dev.mash.jwtauth.service.AuthenticationService;
-import dev.mash.jwtauth.service.CustomUserDetailsService;
-import dev.mash.jwtauth.service.JwtService;
-import dev.mash.jwtauth.service.UserService;
+import dev.mash.jwtauth.service.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -87,6 +84,9 @@ class AuthControllerTest {
 
     @SpyBean
     JwtService jwtService;
+
+    @SpyBean
+    RoleService roleService;
 
     @SpyBean
     UserService userService;
