@@ -21,28 +21,58 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService {
 
-    private final RoleRepository roleRepository;
+    private final RoleService roleService;
     private final UserRepository userRepository;
 
+    /**
+     * Retrieves all the users
+     *
+     * @return the list of all users
+     */
     public List<User> getAllUsers() {
         return this.userRepository.findAll();
     }
 
-    public User getByUsername(String username) {
+    /**
+     * Retrieves the user by the specified username
+     *
+     * @param username the name of the user to look for
+     * @return the user with the specified username
+     * @throws UsernameNotFoundException if the user not found
+     */
+    public User getByUsername(String username) throws UsernameNotFoundException {
         return this.userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User %s not found".formatted(username)));
     }
 
-    public boolean existsByUserName(String userName) {
-        return this.userRepository.existsByUsername(userName);
+    /**
+     * Checks whether the user with the specified username exists
+     *
+     * @param username the name of the user to check against
+     * @return true if the user exists, otherwise false
+     */
+    public boolean existsByUserName(String username) {
+        return this.userRepository.existsByUsername(username);
     }
 
+    /**
+     * Checks whether the user with the specified email address exists
+     *
+     * @param email the email of the user to check against
+     * @return true if the user exists, otherwise false
+     */
     public boolean existsByEmail(String email) {
         return this.userRepository.existsByEmail(email);
     }
 
+    /**
+     * Creates a new user unless it already exists
+     *
+     * @param user the user to create
+     * @throws IllegalStateException if the user already exists or the roles for the user are not assigned
+     */
     @Transactional
-    public User createUser(User user) {
+    public void createUser(User user) throws IllegalStateException {
         if (this.existsByUserName(user.getUsername())) {
             throw new IllegalStateException("Username already exists");
         }
@@ -51,8 +81,7 @@ public class UserService {
             throw new IllegalStateException("Email already exists");
         }
 
-        List<RoleType> userRoleTypes = user.getRoles().stream().map(Role::getType).toList();
-        List<Role> dbRoles = this.roleRepository.findRolesByTypeIn(userRoleTypes);
+        List<Role> dbRoles = this.roleService.getUserRoles(user);
 
         if (dbRoles.isEmpty()) {
             throw new IllegalStateException("Roles list empty");
@@ -60,6 +89,6 @@ public class UserService {
 
         user.setRoles(dbRoles);
 
-        return this.userRepository.save(user);
+        this.userRepository.save(user);
     }
 }
