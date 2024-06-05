@@ -24,7 +24,7 @@ public class SignInRequest {
     @JsonProperty(value = "username", required = true)
     private String username;
 
-    @Schema(description = "Password", requiredMode = Schema.RequiredMode.REQUIRED, example = "password")
+    @Schema(description = "Password", requiredMode = Schema.RequiredMode.REQUIRED, example = "pwd12345")
     @Size(min = 5, max = 250, message = "Password must have a length between 5 and 250")
     @NotBlank(message = "Password must not be empty")
     @JsonProperty(value = "password", required = true)
