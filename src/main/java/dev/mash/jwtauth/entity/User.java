@@ -53,7 +53,7 @@ public class User implements UserDetails {
     }
 
     public void setRoles(List<Role> roles) {
-        this.roles.clear();
+        this.roles = new ArrayList<>();
         roles.forEach(this::addRole);
     }
 
