@@ -1,9 +1,7 @@
 package dev.mash.jwtauth.service;
 
 import dev.mash.jwtauth.entity.Role;
-import dev.mash.jwtauth.entity.RoleType;
 import dev.mash.jwtauth.entity.User;
-import dev.mash.jwtauth.repository.RoleRepository;
 import dev.mash.jwtauth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
